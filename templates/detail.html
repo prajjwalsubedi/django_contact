@@ -1,47 +1,42 @@
- {% if contact.gender == 'male' %}
-    <!-- Card for details -->
-    <div class="card my-2 mx-2 boy-card">
-        <img src="
-        {% if contact.image %}
-        {{contact.image.url}}
-        {% else %}
-        {% static 'images/boy.png' %}
-        {% endif %}" class="img-fluid" />
-        <div class="card-header">
-            <a href="detail.html" class="text-white header-link"><i class="fas fa-mars mr-2"></i> {{contact.name}}</a>
-        </div>
-        <div class="card-body pb-0">
-            <p>
-                <i class="fas fa-at mr-2"></i>
-                <a href="mailto:{{contact.email}}">{{contact.email}}</a>
-            </p>
-            <p>
-                <i class="fas fa-phone mr-2"></i>
-                <a href="tel:{{contact.phone}}">{{contact.phone}}</a>
-            </p>
-            <p><i class="fas fa-info-circle mr-2"></i> {{contact.info}}</p>
-        </div>
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+  {% if contact.manager == request.user %}
+    {{contact.name}}
+  {% else %}
+    Permission Error
+  {% endif %}
+{% endblock title %}
+{% block content %}
+
+    <!-- Main Section -->
+    {% if contact.manager == request.user %}
+    <div class="container">
+      <h2 class="heading font-weight-light text-center">{{contact.name}}</h2>
+      <hr />
+    </div>
+    <div class="container main-part">
+      <!-- Card for details -->
+      {% include 'partials/_card.html' %}
+
+    <div class="container mt-3">
+      <h5 class="text-center my-3 font-weight-light">Date Added: &nbsp; {{contact.date_added}}</h5>
+      <p class="text-center text-light">
+        <a class="btn btn-info px-5" href="{% url 'update' contact.id %}">
+        <i class="far fa-edit"></i> &nbsp; Update
+        </a>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-danger px-5" href="{% url 'delete' contact.id %}">
+        <i class="fas fa-trash-alt"></i> &nbsp; Delete
+        </a>
+        </p>
+      </div>
     </div>
     {% else %}
-    <div class="card my-2 mx-2 girl-card">
-        <img src="{% if contact.image %}
-        {{contact.image.url}}
-        {% else %}
-        {% static 'images/girl.png' %}
-        {% endif %}" class="img-fluid" />
-        <div class="card-header">
-            <a href="detail.html" class="text-white header-link"><i class="fas fa-venus mr-2"></i> {{contact.name}}</a>
-        </div>
-        <div class="card-body pb-0">
-            <p>
-                <i class="fas fa-at mr-2"></i>
-                <a href="mailto:{{contact.email}}">{{contact.email}}</a>
-            </p>
-            <p>
-                <i class="fas fa-phone mr-2"></i>
-                <a href="tel:{{contact.phone}}">{{contact.phone}}</a>
-            </p>
-            <p><i class="fas fa-info-circle mr-2"></i>{{contact.info}}</p>
-        </div>
+    <div class="container">
+      <h2 class="heading font-weight-light text-center">You don't have access to this page</h2>
+      <hr />
     </div>
     {% endif %}
+    <!-- Main Section End -->
+{% endblock content %}

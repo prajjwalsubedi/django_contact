@@ -33,7 +33,7 @@ nav {
   color: white;
   text-decoration: none;
 }
-form {
+/* form {
   position: relative;
 }
 button {
@@ -44,9 +44,9 @@ button {
 }
 button i {
   color: var(--back);
-}
+} */
 
-input {
+search-box {
   border-radius: 0px !important;
   width: 250px;
   border: none !important;
@@ -118,6 +118,14 @@ footer {
 
 /* Media Queries */
 @media only screen and (max-width: 768px) {
+
+  /* extra style */
+  .feature-link{
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    }
+  /* extra style end*/
+
   /* navbar style */
   nav {
     flex-direction: column;

@@ -1,7 +1,7 @@
 {% load static %}
  {% if contact.gender == 'male' %}
     <!-- Card for details -->
-    <div class="card my-2 mx-2 boy-card">
+    <div class="card my-2 mx-2 boy-card {% if 'detail' in request.path %}mx-auto w-25{% endif %}">
         <img src="
         {% if contact.image %}
         {{contact.image.url}}
